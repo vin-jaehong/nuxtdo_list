@@ -4,7 +4,7 @@
             <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1">{{ todoData.subject }}</h5>
                 <div>
-                    <small><b-button>edit</b-button></small>
+                    <small><b-button @click="editBtnClickHandler(todoData.code);">edit</b-button></small>
                     <small><b-button @click="deleteBtnClickHandler(todoData.code);">delete</b-button></small>
                 </div>
             </div>
@@ -20,11 +20,14 @@
 
 <script setup lang="ts">
     import { TodoData, useDefaultStore } from '~/store/store';
+    import { useModalStore } from '~/store/modal_store';
     import { defineProps } from 'vue';
-    const DefaultStore = useDefaultStore();
+    const defaultStore = useDefaultStore();
+    const modalStore = useModalStore();
 
     //store
-    const { deleteTodoData } = DefaultStore;
+    const { deleteTodoData } = defaultStore;
+    const { toggleEditTodoModal, setCurrentEditTodoData } = modalStore;
 
     //props
     interface Props {
@@ -36,6 +39,13 @@
     const deleteBtnClickHandler = (code: TodoData['code'])=> {
         const response = deleteTodoData(code);
         if (response.success===false)   alert('delete failed');
+    };
+    //수정 버튼 클릭 시 이벤트
+    const editBtnClickHandler = (code: TodoData['code'])=> {
+        //상태 갱신
+        setCurrentEditTodoData(code);
+        //모달 열기
+        toggleEditTodoModal(true);
     };
 </script>
 

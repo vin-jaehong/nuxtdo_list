@@ -58,6 +58,13 @@ export const useDefaultStore = defineStore('default', {
             }
             return result;
         },
+        getTodoDataByCode(code: TodoData['code']) {
+            //로컬 스토리지에 있는 todo list 가져오기
+            let localStorageTodoList:TodoData[] = JSON.parse(localStorage.getItem(this.todoListSecretKey) ?? '[]');
+            //목록에서 서칭
+            //TODO 넘어온 데이터 검증 부터 작업 필요
+            localStorageTodoList.find(todoData=>todoData.code===code)
+        },
     },
 });
 

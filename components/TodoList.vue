@@ -1,6 +1,8 @@
 <template>
-    <div>
+    <div>   
         <TodoItem v-for="todoData of todoList" :key="todoData.code" :todoData="todoData"></TodoItem>
+        
+        <EditTodoModal></EditTodoModal>
     </div>
 </template>
 
@@ -14,5 +16,4 @@
 </script>
 
 <style lang="scss">
-    
 </style>
