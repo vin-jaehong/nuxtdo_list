@@ -17,7 +17,7 @@ export const useDefaultStore = defineStore('default', {
             console.log('updateTolist')
             this.todoList = JSON.parse(localStorage.getItem(this.todoListSecretKey) ?? '[]');
         },
-        saveTodoList(newTodoData:TodoData): MethodResult {
+        saveTodoData(newTodoData:TodoData): MethodResult {
             const result: MethodResult = {success:true, msg:''};
             try {
                 //기존에 데이터가 있을 경우 교체

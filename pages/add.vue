@@ -29,7 +29,7 @@
     import { ref, useRouter } from '@nuxtjs/composition-api';
     import { useDefaultStore, TodoData, MethodResult } from '~/store/store';
     const defaultStore = useDefaultStore();
-    const { saveTodoList } = defaultStore;
+    const { saveTodoData } = defaultStore;
     const router = useRouter();
 
     //제목, 내용
@@ -61,7 +61,7 @@
             };
 
             //스토어에 저장 요청
-            const response = saveTodoList(todoDataTemplate);
+            const response = saveTodoData(todoDataTemplate);
             if (response.success===false) throw response.msg;
         } catch(e) {
             result.success = false;
