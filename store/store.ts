@@ -13,7 +13,8 @@ export const useDefaultStore = defineStore('default', {
         changeCurrentUrlPath(newUrlPath: string) {
             this.currentUrlPath = newUrlPath;
         },
-        updateTodoList() {
+        updateTodoList(): void {
+            console.log('updateTolist')
             this.todoList = JSON.parse(localStorage.getItem(this.todoListSecretKey) ?? '[]');
         },
         saveTodoList(newTodoData:TodoData): MethodResult {
