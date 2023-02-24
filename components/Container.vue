@@ -10,4 +10,8 @@
 </script>
 
 <style lang="scss">
+    .container {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
 </style>
