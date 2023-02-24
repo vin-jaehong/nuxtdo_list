@@ -41,6 +41,23 @@ export const useDefaultStore = defineStore('default', {
             }
             return result;
         },
+        deleteTodoData(code: TodoData["code"]): MethodResult {
+            const result: MethodResult = {success: true, msg:''};
+            try {
+                //로컬 스토리지에 있는 todo list 가져오기
+                let localStorageTodoList:TodoData[] = JSON.parse(localStorage.getItem(this.todoListSecretKey) ?? '[]');
+                //목록 중 제거 할 데이터만 제외하고 재 할당
+                localStorageTodoList = localStorageTodoList.filter(todoData=>todoData.code!==code);
+                //로컬 스토리지 저장
+                localStorage.setItem(this.todoListSecretKey, JSON.stringify(localStorageTodoList));
+                //상태 업데이트
+                this.updateTodoList();
+            } catch(e) {
+                result.success = false;
+                result.msg = e;    
+            }
+            return result;
+        },
     },
 });
 
