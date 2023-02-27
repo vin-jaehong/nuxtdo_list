@@ -1,6 +1,11 @@
 <template>
-    <div>   
-        <TodoItem v-for="todoData of todoList" :key="todoData.code" :todoData="todoData" class="mb-2"></TodoItem>
+    <div>
+        <div style="min-height: 700px; position: relative;">
+            <TodoItem v-for="todoData of todoList" :key="todoData.code" :todoData="todoData" class="mb-2"></TodoItem>
+            <div class="no-search-wrap" v-if="todoList.length<1">
+                <p>Search not found</p>
+            </div>
+        </div>
         
         <div class="text-center mt-5">
             <b-button variant="outline-info" @click="moreBtnClickHandler">MORE</b-button>
@@ -28,4 +33,19 @@
 </script>
 
 <style lang="scss">
+    .no-search-wrap {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        display: table;
+        text-align: center;
+        background-color: #00000017;
+        color: #0000002a;
+        p {
+            display: table-cell;
+            vertical-align: middle;
+        }
+    }
 </style>
