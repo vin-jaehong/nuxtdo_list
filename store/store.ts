@@ -7,6 +7,7 @@ export const useDefaultStore = defineStore('default', {
         todoList: [],
         todoListPagingCount: 1,
         todoListPagingSize: 5,
+        todoListSearchString: '',
     }),
     getters: {
 
@@ -15,8 +16,16 @@ export const useDefaultStore = defineStore('default', {
         changeCurrentUrlPath(newUrlPath: string) {
             this.currentUrlPath = newUrlPath;
         },
+        updateTodoListSearchString(newSearchString: DefaultStoreState['todoListSearchString']): void {
+            this.todoListSearchString = newSearchString;
+            this.updateTodoList();
+        },
         updateTodoList(): void {
-            this.todoList = JSON.parse(localStorage.getItem(this.todoListSecretKey) ?? '[]').slice(0, this.todoListPagingSize * this.todoListPagingCount);
+            let todoList: TodoData[] = JSON.parse(localStorage.getItem(this.todoListSecretKey) ?? '[]');
+            if (this.todoListSearchString!=='') {
+                todoList = todoList.filter(todoData=>todoData.content.includes(this.todoListSearchString));
+            }
+            this.todoList = todoList.slice(0, this.todoListPagingSize * this.todoListPagingCount);
         },
         increaseTodoListPagingCount(): void {
             this.todoListPagingCount++;
@@ -90,4 +99,5 @@ interface DefaultStoreState {
     todoList: TodoData[],
     todoListPagingCount: number,
     todoListPagingSize: number,
+    todoListSearchString: string,
 }
