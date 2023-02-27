@@ -8,5 +8,8 @@
     </div>
 </template>
 
-<style>
+<style lang="scss">
+    .cursor {
+        cursor: pointer;
+    }
 </style>

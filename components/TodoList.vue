@@ -1,6 +1,6 @@
 <template>
     <div>   
-        <TodoItem v-for="todoData of todoList" :key="todoData.code" :todoData="todoData"></TodoItem>
+        <TodoItem v-for="todoData of todoList" :key="todoData.code" :todoData="todoData" class="mb-2"></TodoItem>
         
         <div class="text-center mt-5">
             <b-button variant="outline-info" @click="moreBtnClickHandler">MORE</b-button>
