@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
     import { storeToRefs } from 'pinia';
-    import { useDefaultStore, TodoData } from '~/store/store';
+    import { useDefaultStore } from '~/store/store';
     import { useModalStore } from '~/store/modal_store';
     const defaultStore = useDefaultStore();
     const modalStore = useModalStore();
