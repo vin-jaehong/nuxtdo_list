@@ -4,10 +4,10 @@
             <b-card-group deck style="height: 100%;" class="text-center">
                 <b-card header="Edit">
                     <b-input-group size="sm" prepend="Subject">
-                        <b-form-input placeholder="Please enter Subject"></b-form-input>
+                        <b-form-input placeholder="Please enter Subject" v-model="currentEditTodoData.subject"></b-form-input>
                     </b-input-group>
-                    <b-form-textarea placeholder="Please enter content" class="mt-5" style="height:70%;"></b-form-textarea>
-                    <b-button variant="info">Submit</b-button>
+                    <b-form-textarea placeholder="Please enter content" class="mt-5" style="height:70%;" v-model="currentEditTodoData.content"></b-form-textarea>
+                    <b-button variant="info" @click="submitBtnClickHandler">Submit</b-button>
                     <b-button @click="cancelBtnClickHandler">Cancel</b-button>
                 </b-card>
             </b-card-group>
@@ -17,11 +17,14 @@
 
 <script setup lang="ts">
     import { storeToRefs } from 'pinia';
+    import { useDefaultStore, TodoData } from '~/store/store';
     import { useModalStore } from '~/store/modal_store';
+    const defaultStore = useDefaultStore();
     const modalStore = useModalStore();
     
     //store
-    const { showEditTodoModal } = storeToRefs(modalStore);
+    const { saveTodoData } = defaultStore;
+    const { showEditTodoModal, currentEditTodoData } = storeToRefs(modalStore);
     const { toggleEditTodoModal } = modalStore;
 
     //method
@@ -29,6 +32,11 @@
         //모달 닫기
         toggleEditTodoModal(false);
     };
+    const submitBtnClickHandler = ()=> {
+        //저장 후 모달 닫기
+        saveTodoData(currentEditTodoData.value);
+        toggleEditTodoModal(false);
+    }
 </script>
 
 <style lang="scss">

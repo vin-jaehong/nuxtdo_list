@@ -58,12 +58,11 @@ export const useDefaultStore = defineStore('default', {
             }
             return result;
         },
-        getTodoDataByCode(code: TodoData['code']) {
+        getTodoDataByCode(code: TodoData['code']): TodoData|boolean {
             //로컬 스토리지에 있는 todo list 가져오기
             let localStorageTodoList:TodoData[] = JSON.parse(localStorage.getItem(this.todoListSecretKey) ?? '[]');
             //목록에서 서칭
-            //TODO 넘어온 데이터 검증 부터 작업 필요
-            localStorageTodoList.find(todoData=>todoData.code===code)
+            return localStorageTodoList.find(todoData=>todoData.code===code) ?? false;
         },
     },
 });
@@ -71,6 +70,7 @@ export const useDefaultStore = defineStore('default', {
 export interface MethodResult {
     success: boolean,
     msg: unknown|string,
+    data?: object,
 }
 
 export interface TodoData {
