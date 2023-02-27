@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-list-group-item @click="todoListItemClickHandler" class="flex-column align-items-start cursor todo-list-item" style="position: relative;">
+        <b-list-group-item @click="todoListItemClickHandler($event.target)" class="flex-column align-items-start cursor todo-list-item" style="position: relative;">
             <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1">{{ todoData.subject }}</h5>
                 
@@ -53,7 +53,11 @@
         toggleEditTodoModal(true);
     };
     //항목 클릭 시 이벤트
-    const todoListItemClickHandler = ()=> {
+    const todoListItemClickHandler = (target: HTMLElement)=> {
+        //버튼 클릭 일 경우 종료
+        if (target instanceof HTMLButtonElement) {
+            return false;
+        }
         //체크 여부 변경 후 저장 (props 원본 값은 건들지 않음)
         const changeTodoData = {...props.todoData} as TodoData;
         changeTodoData.isChecked = !changeTodoData.isChecked;
