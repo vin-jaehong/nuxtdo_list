@@ -4,8 +4,8 @@
             <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1">{{ todoData.subject }}</h5>
                 <div>
-                    <small><b-button @click="editBtnClickHandler(todoData.code);">edit</b-button></small>
-                    <small><b-button @click="deleteBtnClickHandler(todoData.code);">delete</b-button></small>
+                    <small><b-button variant="outline-info" @click="editBtnClickHandler(todoData.code);">edit</b-button></small>
+                    <small><b-button variant="outline-danger" @click="deleteBtnClickHandler(todoData.code);">delete</b-button></small>
                 </div>
             </div>
 

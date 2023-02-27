@@ -5,6 +5,8 @@ export const useDefaultStore = defineStore('default', {
         currentUrlPath: '/',
         todoListSecretKey: 'todoListSecretKey',
         todoList: [],
+        todoListPagingCount: 1,
+        todoListPagingSize: 5,
     }),
     getters: {
 
@@ -14,8 +16,10 @@ export const useDefaultStore = defineStore('default', {
             this.currentUrlPath = newUrlPath;
         },
         updateTodoList(): void {
-            console.log('updateTolist')
-            this.todoList = JSON.parse(localStorage.getItem(this.todoListSecretKey) ?? '[]');
+            this.todoList = JSON.parse(localStorage.getItem(this.todoListSecretKey) ?? '[]').slice(0, this.todoListPagingSize * this.todoListPagingCount);
+        },
+        increaseTodoListPagingCount(): void {
+            this.todoListPagingCount++;
         },
         saveTodoData(newTodoData:TodoData): MethodResult {
             const result: MethodResult = {success:true, msg:''};
@@ -84,4 +88,6 @@ interface DefaultStoreState {
     currentUrlPath: string,
     todoListSecretKey: string,
     todoList: TodoData[],
+    todoListPagingCount: number,
+    todoListPagingSize: number,
 }

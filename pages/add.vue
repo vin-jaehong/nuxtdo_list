@@ -21,7 +21,7 @@
             ></b-form-textarea>
             </b-col>
         </b-row>
-        <b-button variant="info" class="float-right mt-2" @click="addBtnClickHandler">추가</b-button>
+        <b-button variant="outline-info" class="float-right mt-2" @click="addBtnClickHandler">추가</b-button>
     </div>
 </template>
 
